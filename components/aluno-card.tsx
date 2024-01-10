@@ -28,7 +28,7 @@ const AlunoCard = ({ aluno, onClick } : ICardProps) => {
       <div className="flex justify-evenly items-center w-3/4">
         <h2>{aluno.email}</h2>
         <h2 className={`py-2 px-4 rounded-md ${aluno.planoPago ? "bg-green-200 text-green-800" : "bg-red-200 text-red-800"}`}>
-          {aluno.planoPago ? "Pago" : "Vencido"}
+          {aluno.planoPago ? "Quitado" : "Vencido"}
         </h2>
       </div>
     </div>

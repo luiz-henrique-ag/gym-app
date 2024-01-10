@@ -21,7 +21,8 @@ const dadosMocados: Aluno[] = [
     objetivo: "Perda de peso",
     plano: 1,
     vencimento: new Date("2023-12-31"),
-    planoPago: true
+    planoPago: true,
+    observacoes: "Joelho esquerdo com dores"
   },
   {
     matricula: 2,

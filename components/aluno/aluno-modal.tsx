@@ -1,8 +1,7 @@
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
 import React from 'react'
 import { Aluno } from '@/models/aluno.model'
-import { AvatarIcon, Cross2Icon, TrashIcon, Pencil1Icon } from '@radix-ui/react-icons'
-import { Textarea } from './ui/textarea'
+import { Cross2Icon } from '@radix-ui/react-icons'
 import { CircleUserRound, CreditCard, PenSquare, Trash2 } from 'lucide-react'
 
 interface IModalProps {

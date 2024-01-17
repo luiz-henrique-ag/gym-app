@@ -1,13 +1,13 @@
 "use client"
 
-import AlunoCard from "@/components/aluno-card"
+import AlunoCard from "@/components/aluno/aluno-card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import Link from "next/link"
 import { Aluno } from "@/models/aluno.model"
 import { useState } from "react"
-import AlunoModal from "@/components/aluno-modal"
+import AlunoModal from "@/components/aluno/aluno-modal"
 
 const dadosMocados: Aluno[] = [
   {

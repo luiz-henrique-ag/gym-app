@@ -6,25 +6,35 @@ import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { Button } from '../ui/button'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem } from '../ui/select'
-import { cn } from '@/lib/utils'
-import { Popover, PopoverTrigger, PopoverContent } from '../ui/popover'
-import { Calendar } from "@/components/ui/calendar"
-import { format } from 'date-fns'
-import { CalendarIcon } from 'lucide-react'
+import InputMask from '../inputs/input-mask'
 
 interface IFormProps {
   aluno?: Aluno
 }
 
 const AlunoForm = ({ aluno }: IFormProps) => {
-  const [newAluno, setNewAluno] = useState<Aluno | undefined>(undefined);
-  const [dateNasc, setDateNasc] = useState<Date>()
-  const [dateVencimento, setDateVencimento] = useState<Date>();
-  if (aluno) {
-    setNewAluno(aluno)
+  const [currentAluno, setCurrentAluno] = useState<Aluno>({} as Aluno);
+  const [isNew, setIsNew] = useState<boolean>(true);
+  if (aluno && isNew) {
+    setCurrentAluno(aluno);
+    setIsNew(false);
   }
+  /* Trata dos eventos de mudança dos campos do formulário */
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setCurrentAluno({
+      ...currentAluno,
+      [name]: value
+    })
+  }
+
+  const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(currentAluno);
+  }
+
   return (
-    <form method='post' onSubmit={(e) => e.preventDefault()}>
+    <form method='post' onSubmit={handleSubmit}>
       <div className='flex flex-col gap-3'>
         <h2 className='font-bold'>Dados Pessoais</h2>
         {
@@ -35,69 +45,101 @@ const AlunoForm = ({ aluno }: IFormProps) => {
             <Input disabled value={aluno.matricula} />
           </div>
         }
-
         <div>
-          <label>Nome</label>
-          <Input />
+          <label htmlFor='nome'>Nome</label>
+          <Input 
+            placeholder='Ex: Pedro Silva Nunes'
+            id='nome' 
+            name='nome' 
+            value={currentAluno.nome} 
+            onChange={handleChange}
+          />
         </div>
         <div className='grid grid-cols-3 gap-2'>
           <div>
-            <label>CPF</label>
-            <Input placeholder='Ex: 123.456.789-10' />
+            <label htmlFor='cpf'>CPF</label>
+            <InputMask 
+              placeholder='Ex: 123.456.789-10'
+              id='cpf'
+              name='cpf'
+              mask='cpf'
+              value={currentAluno.cpf} 
+              onChange={handleChange} 
+            />
           </div>
           <div>
-            <label>Telefone</label>
-            <Input placeholder='Ex: (38) 9 9332-3283' />
+            <label htmlFor='telefone'>Telefone</label>
+            <InputMask 
+              placeholder='Ex: (38) 99332-3283' 
+              id="telefone" 
+              name="telefone"
+              mask='phone'
+              value={currentAluno.telefone}
+              onChange={handleChange}
+            />
           </div>
           <div>
             <label>Data Nasc.</label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "w-full justify-start text-left font-normal",
-                    !dateNasc && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {dateNasc ? format(dateNasc, "dd/MM/yyyy") : <span>Escolha uma data</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={dateNasc}
-                  onSelect={setDateNasc}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
+            <InputMask 
+              placeholder='Ex: 24/03/2002' 
+              id="dataNascimento" 
+              name="dataNascimento"
+              mask='date'
+              value={currentAluno.dataNascimento}
+              onChange={handleChange}
+            />
           </div>
         </div>
         <div className='mb-4'>
-          <label>E-Mail</label>
-          <Input placeholder='exemplo@email.com' />
+          <label htmlFor='email'>E-Mail</label>
+          <Input
+            placeholder='exemplo@email.com'
+            type='email'
+            id='email'
+            name='email'
+            value={currentAluno.email}
+            onChange={handleChange}
+          />
         </div>
         <h2 className='font-bold'>Características</h2>
         <div className='grid grid-cols-3 gap-2 mb-4'>
           <div>
-            <label>Altura</label>
-            <Input placeholder='cm' type='number' />
+            <label htmlFor='altura'>Altura</label>
+            <Input
+              placeholder='cm'
+              type='number'
+              id='altura'
+              name='altura'
+              value={currentAluno.altura}
+              onChange={handleChange}
+            />
           </div>
           <div>
-            <label>Peso</label>
-            <Input placeholder='kg' type='number' />
+            <label htmlFor='peso'>Peso</label>
+            <Input
+              placeholder='kg'
+              type='number'
+              id='peso'
+              name='peso'
+              value={currentAluno.peso}
+              onChange={handleChange}
+            />
           </div>
           <div>
-            <label>Objetivo</label>
-            <Input placeholder='Emagrecimento, hipertrofia, etc.' />
+            <label htmlFor='objetivo'>Objetivo</label>
+            <Input
+              placeholder='Emagrecimento, hipertrofia, etc.'
+              id='objetivo'
+              name='objetivo'
+              value={currentAluno.objetivo}
+              onChange={handleChange}
+            />
           </div>
         </div>
         <h2 className='font-bold'>Informações do Plano</h2>
         <div className='grid grid-cols-2 gap-2'>
           <div>
-            <h2>Plano</h2>
+            <label>Plano</label>
             <Select defaultValue='mensal'>
               <SelectTrigger>
                 <SelectValue />
@@ -113,37 +155,35 @@ const AlunoForm = ({ aluno }: IFormProps) => {
             </Select>
           </div>
           <div>
-            <label>Vencimento</label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "w-full justify-start text-left font-normal",
-                    !dateVencimento && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {dateVencimento ? format(dateVencimento, "dd/MM/yyyy") : <span>Escolha uma data</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={dateVencimento}
-                  onSelect={setDateVencimento}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
+            <label htmlFor='vencimento'>Vencimento</label>
+            <InputMask
+              placeholder='Ex: 15/02'
+              id='vencimento'
+              name='vencimento'
+              mask='halfDate'
+              onChange={handleChange}
+              value={currentAluno.vencimento}
+            />
           </div>
         </div>
         <div>
-          <label>Observações</label>
-          <Textarea placeholder='Dor no joelho, Hérnia de disco, etc.' />
+          <label htmlFor='obs'>Observações</label>
+          <Textarea
+            placeholder='Dor no joelho, Hérnia de disco, etc.'
+            id='obs'
+            name='observacoes'
+            value={currentAluno.observacoes}
+            onChange={handleChange}
+          />
         </div>
         <div className='flex items-center justify-end'>
-          <Button variant="success" size="lg" onClick={(e) => e.preventDefault()}>Salvar</Button>
+          <Button
+            variant="success"
+            size="lg"
+            type='submit'
+          >
+            Salvar
+          </Button>
         </div>
       </div>
     </form>

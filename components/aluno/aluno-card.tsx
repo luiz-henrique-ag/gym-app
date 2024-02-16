@@ -10,13 +10,14 @@ interface ICardProps {
 
 const AlunoCard = ({ aluno, onClick }: ICardProps) => {
   return (
-    <div className="flex gap-6 items-center
-      w-full h-[100px] max-h-[100px]
-      px-8 py-2 
-      border border-gray-300 
-      shadow-md rounded-lg 
-      hover:scale-[1.02] hover:cursor-pointer 
-      transition-all"
+    <div 
+      className="flex gap-6 items-center
+        w-full h-[100px] max-h-[100px]
+        px-8 py-2 
+        border border-gray-300 
+        shadow-md rounded-lg 
+        hover:scale-[1.015] hover:cursor-pointer 
+        transition-all"
       onClick={onClick}
     >
       <div className='flex gap-2 w-1/4 items-center'>
@@ -27,8 +28,8 @@ const AlunoCard = ({ aluno, onClick }: ICardProps) => {
         </div>
       </div>
       <div className="flex justify-evenly items-center w-3/4">
-        <h2>{aluno.email}</h2>
-          {aluno.planoPago ?
+        <h2>{aluno.cpf}</h2>
+          {aluno.ultimoPagamento ?
             <Badge variant="success" className='py-2 px-4'>Quitado</Badge> :
             <Badge variant="destructive" className='py-2 px-4'>Vencido</Badge>
           }

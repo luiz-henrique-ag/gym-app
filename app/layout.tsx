@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../styles/globals.css'
 import '@radix-ui/themes/styles.css';
-import Nav from '@/components/nav';
+import Nav from '@/components/layout/nav';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,6 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <link rel="icon" href="favicon.ico" sizes="any" />
       <body className={inter.className}>
         <div className="flex min-h-full h-full min-w-full">
           <Nav />

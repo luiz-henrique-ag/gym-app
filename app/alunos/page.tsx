@@ -13,94 +13,122 @@ const dadosMocados: Aluno[] = [
   {
     matricula: 1,
     nome: "Fulano Silva",
+    cpf: "092.123.123-12",
     telefone: "123456789",
     email: "aluno1@example.com",
-    dataNascimento: new Date("1990-01-01"),
+    dataNascimento: "1990-01-01",
     altura: 170,
     peso: 70,
     objetivo: "Perda de peso",
     plano: 1,
-    vencimento: new Date("2023-12-31"),
-    planoPago: true,
+    vencimento: "2023-12-31",
+    ultimoPagamento: true,
     observacoes: "Joelho esquerdo com dores"
   },
   {
     matricula: 2,
     nome: "Ciclano Souza",
+    cpf: "125.643.125-65",
     telefone: "987654321",
     email: "aluno2@example.com",
-    dataNascimento: new Date("1995-05-15"),
+    dataNascimento: "1995-05-15",
     altura: 160,
     peso: 55,
     objetivo: "Ganho de massa muscular",
     plano: 2,
-    vencimento: new Date("2023-12-31"),
-    planoPago: true
+    vencimento: "2023-12-31",
+    ultimoPagamento: true,
+    observacoes: "Joelho esquerdo com dores"
   },
   {
     matricula: 3,
     nome: "Beltrano Oliveira",
+    cpf: "098.124.243-52",
     telefone: "555123456",
     email: "aluno3@example.com",
-    dataNascimento: new Date("1985-07-20"),
+    dataNascimento: "1985-07-20",
     altura: 175,
     peso: 80,
     objetivo: "Manutenção",
     plano: 3,
-    vencimento: new Date("2023-12-31"),
-    planoPago: false
+    vencimento: "2023-12-31",
+    ultimoPagamento: false,
+    observacoes: "Joelho esquerdo com dores"
   },
   {
     matricula: 4,
     nome: "Sicrano Santos",
+    cpf: "092.123.123-12",
     telefone: "999987654",
     email: "aluno4@example.com",
-    dataNascimento: new Date("1992-03-10"),
+    dataNascimento: "1992-03-10",
     altura: 180,
     peso: 85,
     objetivo: "Perda de peso",
     plano: 1,
-    vencimento: new Date("2023-12-31"),
-    planoPago: true
+    vencimento: "2023-12-31",
+    ultimoPagamento: true,
+    observacoes: "Joelho esquerdo com dores"
   },
   {
     matricula: 5,
     nome: "Maria Oliveira",
+    cpf: "092.123.123-12",
     telefone: "777654321",
     email: "aluno5@example.com",
-    dataNascimento: new Date("1988-12-05"),
+    dataNascimento: "1988-12-05",
     altura: 160,
     peso: 60,
     objetivo: "Ganho de massa muscular",
     plano: 2,
-    vencimento: new Date("2023-12-31"),
-    planoPago: true
+    vencimento: "2023-12-31",
+    ultimoPagamento: true,
+    observacoes: "Joelho esquerdo com dores"
   },
   {
     matricula: 6,
     nome: "João Pereira",
+    cpf: "092.123.123-12",
     telefone: "333999888",
     email: "aluno6@example.com",
-    dataNascimento: new Date("1997-09-15"),
+    dataNascimento: "1997-09-15",
     altura: 165,
     peso: 75,
     objetivo: "Definição muscular",
     plano: 3,
-    vencimento: new Date("2023-12-31"),
-    planoPago: true
+    vencimento: "2023-12-31",
+    ultimoPagamento: true,
+    observacoes: "Joelho esquerdo com dores"
   },
   {
     matricula: 7,
     nome: "Ana Silva",
+    cpf: "092.123.123-12",
     telefone: "222555444",
     email: "aluno7@example.com",
-    dataNascimento: new Date("1993-02-28"),
+    dataNascimento: "1993-02-28",
     altura: 170,
     peso: 68,
     objetivo: "Ganho de força",
     plano: 2,
-    vencimento: new Date("2023-12-31"),
-    planoPago: false
+    vencimento: "2023-12-31",
+    ultimoPagamento: false,
+    observacoes: "Joelho esquerdo com dores"
+  },
+  {
+    matricula: 8,
+    nome: "Jose Preto",
+    cpf: "092.123.123-12",
+    telefone: "222555444",
+    email: "aluno7@example.com",
+    dataNascimento: "1993-02-28",
+    altura: 170,
+    peso: 68,
+    objetivo: "Ganho de força",
+    plano: 2,
+    vencimento: "2023-12-31",
+    ultimoPagamento: false,
+    observacoes: "Joelho esquerdo com dores"
   },
 ];
 
@@ -121,7 +149,7 @@ export default function Alunos() {
             </Button>
           </Link>
         </div>
-        <div className="flex flex-col justify-center items-center gap-3">
+        <div className="flex flex-col justify-center items-center gap-3 py-1 px-3 overflow-y-auto">
           {
             dadosMocados.map((aluno, index) => <AlunoCard aluno={aluno} key={index} onClick={() => setSelectedAluno(aluno)}/>)
           }

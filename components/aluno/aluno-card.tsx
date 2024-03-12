@@ -12,11 +12,11 @@ const AlunoCard = ({ aluno, onClick }: ICardProps) => {
   return (
     <div 
       className="flex gap-6 items-center
-        w-full h-[100px] max-h-[100px]
+        h-[100px] max-h-[100px]
         px-8 py-2 
         border border-gray-300 
-        shadow-md rounded-lg 
-        hover:scale-[1.015] hover:cursor-pointer 
+        rounded-lg 
+        hover:scale-[1.015] cursor-pointer 
         transition-all"
       onClick={onClick}
     >
@@ -30,8 +30,8 @@ const AlunoCard = ({ aluno, onClick }: ICardProps) => {
       <div className="flex justify-evenly items-center w-3/4">
         <h2>{aluno.cpf}</h2>
           {aluno.ultimoPagamento ?
-            <Badge variant="success" className='py-2 px-4'>Quitado</Badge> :
-            <Badge variant="destructive" className='py-2 px-4'>Vencido</Badge>
+            <Badge variant="success" className='py-2 px-4 text-green-800 bg-green-100'>Quitado</Badge> :
+            <Badge variant="destructive" className='py-2 px-4 text-red-800 bg-red-100'>Vencido</Badge>
           }
       </div>
     </div>

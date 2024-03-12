@@ -1,4 +1,4 @@
-export interface Funcionario{
+export interface Funcionario {
   id: number
   nome: string
   cpf: string
@@ -6,4 +6,5 @@ export interface Funcionario{
   dataNascimento: string
   salario: number
   email: string
+  cargo: "Personal" | "Faxineiro" | "Secretário(a)"
 }

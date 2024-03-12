@@ -29,7 +29,7 @@ const InputMask: React.FC<InputMaskProps> = ({
       maskChosen = ""; 
       break;
     case 'numberOnly':
-      maskChosen = [/[0-9]/]; 
+      maskChosen = [/^[0-9]$/]; 
       break;
     default:
       break;

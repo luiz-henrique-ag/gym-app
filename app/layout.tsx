@@ -18,11 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <link rel="icon" href="favicon.ico" sizes="any" />
+      <link rel="icon" href="icon.svg" sizes="any" />
       <body className={inter.className}>
-        <div className="flex min-h-full h-full min-w-full">
+        <div className="flex min-h-screen h-screen min-w-full fixed">
           <Nav />
-          <div className="relative py-10 w-full overflow-x-auto lg:px-[150px] px-8">
+          <div className="relative py-10 w-full lg:px-[150px] px-8">
             {children}
           </div>
         </div>

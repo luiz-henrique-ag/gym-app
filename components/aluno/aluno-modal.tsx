@@ -46,7 +46,7 @@ const AlunoModal = ({ aluno, closeAction }: IModalProps) => {
             </div>
             <div className='flex gap-4 items-center justify-between'>
               <h2 className='font-semibold'>CPF</h2>
-              <p className='text-sm text-muted-foreground'>{aluno?.cpf}</p>
+              <p className='text-sm text-muted-foreground'>{aluno.cpf}</p>
             </div>
             <div className='flex gap-4 items-center justify-between'>
               <h2 className='font-semibold'>Telefone</h2>

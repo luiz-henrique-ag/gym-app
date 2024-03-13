@@ -38,7 +38,7 @@ const FuncionariosTable = ({ searchString }: ITableProps) => {
       </TableHeader>
       <TableBody>
         {funcionarios.map((item, index) =>
-          <DataRow funcionario={item} />
+          <DataRow funcionario={item} key={index}/>
         )}
       </TableBody>
     </Table>

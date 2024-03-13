@@ -6,14 +6,21 @@ import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import Link from "next/link"
 import { Aluno } from "@/models/aluno.model"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AlunoModal from "@/components/aluno/aluno-modal"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { alunos } from "@/models/mockedData/data"
+import { getData } from "./api"
 
 export default function Alunos() {
-  const [searchParam, setSearchParam] = useState<string>("");
+  const [searchString, setSearchString] = useState<string>("");
   const [selectedAluno, setSelectedAluno] = useState<Aluno | undefined>(undefined);
+  const [alunosData, setAlunosData] = useState<Promise<Aluno[]>>();
+
+  getData("", 1);
+  useEffect(() => {
+    
+  }, [searchString])
   return (
     <div className="flex justify-center flex-col items-center">
       <h1 className="scroll-m-20 text-2xl font-semibold tracking-tight lg:text-2xl mb-4">Alunos</h1>
@@ -21,9 +28,9 @@ export default function Alunos() {
         <div className="flex justify-end gap-3">
           <Input
             placeholder="Pesquisar..."
-            name="searchParam"
-            value={searchParam}
-            onChange={(e) => setSearchParam(e.currentTarget.value)}
+            name="searchString"
+            value={searchString}
+            onChange={(e) => setSearchString(e.currentTarget.value)}
           />
           <Link href="/alunos/novo">
             <Button className="mb-3">

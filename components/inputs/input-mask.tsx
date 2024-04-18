@@ -6,7 +6,7 @@ interface InputMaskProps extends InputHTMLAttributes<HTMLInputElement> {
   mask: "cpf" | "phone" | "date" | "halfDate" |"currency" | "numberOnly"
 }
 
-const InputMask: React.FC<InputMaskProps> = ({
+export const InputMask: React.FC<InputMaskProps> = ({
   className,
   mask,
   ...props
@@ -43,5 +43,3 @@ const InputMask: React.FC<InputMaskProps> = ({
     />
   )
 }
-
-export default InputMask

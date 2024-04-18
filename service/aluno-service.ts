@@ -21,10 +21,10 @@ export class AlunoService implements IService<Aluno>{
   }
 
   async get(searchString: string, pageNumber: number): Promise<Aluno[] | undefined> {
-    const alunos = fetch("localhost:5066" + `/alunos?searchParam=${searchString}&pageNumber=${pageNumber}`)
-      .then(res => res.json())
-      .catch(e => console.log(e))
+    const alunos = await fetch(`localhost:5066/alunos?searchParam=${searchString}&pageNumber=${pageNumber}`)
+      .then<Aluno[]>(res => res.json())
+      .then(data => data)
 
-    return JSON.parse(await alunos) as Aluno[];
+    return alunos;
   }
 }

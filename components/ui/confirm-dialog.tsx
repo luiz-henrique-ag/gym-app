@@ -1,15 +1,12 @@
-import { Aluno } from '@/models/aluno.model'
-import { Funcionario } from '@/models/funcionario.model'
 import { Cross2Icon } from '@radix-ui/react-icons'
 import Link from 'next/link'
 import { Button } from './button'
 
 interface DialogProps{
-  person?: Aluno | Funcionario
   onCancel: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const ConfirmDialog = ({ person, onCancel } : DialogProps) => {
+const ConfirmDialog = ({ onCancel } : DialogProps) => {
   return (
     <div>
       <div className='fixed top-0 left-0 w-screen h-screen bg-black opacity-60 z-[19]'></div>

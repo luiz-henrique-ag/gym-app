@@ -2,11 +2,11 @@
 
 import { Aluno } from '@/models/aluno.model'
 import React, { useState } from 'react'
-import { Input } from '../ui/input'
-import { Textarea } from '../ui/textarea'
-import { Button } from '../ui/button'
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem } from '../ui/select'
-import InputMask from '../inputs/input-mask'
+import { Input } from '../../../components/ui/input'
+import { Textarea } from '../../../components/ui/textarea'
+import { Button } from '../../../components/ui/button'
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem } from '../../../components/ui/select'
+import {InputMask} from '../../../components/inputs/input-mask'
 
 interface IFormProps {
   aluno?: Aluno

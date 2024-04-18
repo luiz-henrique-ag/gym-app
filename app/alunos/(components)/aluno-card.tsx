@@ -17,7 +17,7 @@ const AlunoCard = ({ aluno, onClick }: ICardProps) => {
         border border-gray-300 
         rounded-lg 
         hover:scale-[1.015] cursor-pointer 
-        transition-all"
+        transition-all hover:shadow-md"
       onClick={onClick}
     >
       <div className='flex gap-2 w-1/4 items-center'>

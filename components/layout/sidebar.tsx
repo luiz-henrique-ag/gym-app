@@ -3,8 +3,6 @@ import { PersonIcon, HomeIcon, BackpackIcon, ClipboardIcon, GearIcon } from '@ra
 import Link from 'next/link'
 import React from 'react'
 import { Button } from '../ui/button'
-import '@/public/icon.svg'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import AppIcon from './app-icon'
@@ -12,44 +10,38 @@ import AppIcon from './app-icon'
 interface INavItem {
   name: string,
   href: string,
-  icon: React.ReactNode
+  icon: React.ElementType
 }
 
 const navItems: INavItem[] = [
   {
     name: "Home",
     href: "/",
-    icon: <HomeIcon />
+    icon: HomeIcon
   },
   {
     name: "Alunos",
     href: "/alunos",
-    icon: <PersonIcon />
+    icon: PersonIcon
   },
   {
     name: "Funcionários",
     href: "/funcionarios",
-    icon: <BackpackIcon />
-  },
-  {
-    name: "Fichas",
-    href: "/fichas",
-    icon: <ClipboardIcon />
+    icon: BackpackIcon
   },
 ]
 
-const NavLink = ({ href, icon, name }: INavItem) => {
+const NavLink = ({ href, icon : Icon, name }: INavItem) => {
   const pathname = usePathname();
   return (
     <Link href={href}>
       <Button
         variant="ghost"
         size="lg"
-        className={cn('w-[200px] text-[16px] flex gap-3 items-center', 
-          ((pathname.includes(href.replace("/" , ""))) ? "bg-[#5aa7ff] text-white" : ""))}
+        className="w-[200px] text-[16px] flex gap-3 items-center"
       >
         <div className='w-1/5'>
-          {icon}
+          <Icon />
         </div>
         <div className='w-4/5 flex justify-start'>
           {name}
@@ -59,7 +51,7 @@ const NavLink = ({ href, icon, name }: INavItem) => {
   )
 }
 
-const Nav = () => {
+export const Sidebar = () => {
   return (
     <aside className="hidden lg:flex flex-col justify-between min-h-full min-w-[220px] py-4 border border-l-0 shadow-md">
       <Link href="/" className='flex items-center justify-center gap-4'>
@@ -78,14 +70,14 @@ const Nav = () => {
           )
         }
       </div>
-      <div className="flex gap-1 flex-col">
-        <Button variant="link" size="lg" className='text-black'>
-          <GearIcon width="16" height="16" className='mr-2' />
-          Configurações
-        </Button>
+      <div>
+        <Link href='/config'>
+          <Button variant="link" size="lg" className='text-black w-full'>
+            <GearIcon width="16" height="16" className='mr-2' />
+            Configurações
+          </Button>
+        </Link>
       </div>
     </aside>
   )
 }
-
-export default Nav

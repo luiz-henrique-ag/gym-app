@@ -1,7 +1,7 @@
 export interface Aluno {
   matricula: number
-  cpf: string
   nome: string
+  cpf: string
   telefone: string
   email: string
   dataNascimento: string

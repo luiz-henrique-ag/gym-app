@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '../styles/globals.css'
 import '@radix-ui/themes/styles.css';
-import Nav from '@/components/layout/nav';
+import { Sidebar } from '@/components/layout/sidebar';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,7 +21,7 @@ export default function RootLayout({
       <link rel="icon" href="icon.svg" sizes="any" />
       <body className={inter.className}>
         <div className="flex min-h-screen h-screen min-w-full fixed">
-          <Nav />
+          <Sidebar />
           <div className="relative py-10 w-full lg:px-[150px] px-8">
             {children}
           </div>

@@ -1,4 +1,4 @@
-import AlunoForm from "@/components/aluno/aluno-form";
+import AlunoForm from "@/app/alunos/(components)/aluno-form";
 
 export default function Novo(){
   return(

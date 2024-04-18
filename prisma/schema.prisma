@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Aluno {
+  matricula Int @id @default(autoincrement())
+  nome String
+  cpf String @db.VarChar(14)
+  telefone String @db.VarChar(14)
+  email String
+  dataNascimento DateTime 
+  altura Int 
+  peso Float
+  objetivo String
+  plano Plano @relation(fields: [planoId], references: [id])
+  planoId Int @unique
+  vencimento String
+  ultimoPagamento String
+  observacoes String
+  fichas Ficha[]
+}
+
+model Plano {
+  id Int @id @default(autoincrement())
+  nome String
+  descricao String
+  valor Float
+  aluno Aluno?
+}
+
+model Personal {
+  id Int @id @default(autoincrement())
+  nome String
+  cpf String @db.VarChar(14)
+  telefone String @db.VarChar(14)
+  dataNascimento DateTime
+  email String
+}
+
+model Exercicio {
+  id Int @id @default(autoincrement())
+  Nome String
+  fichas ExercicioFicha[]
+}
+
+model Ficha {
+  id Int @id @default(autoincrement())
+  nome String
+  descricao String
+  exercicio ExercicioFicha[]
+  alunoId Int
+  aluno Aluno? @relation(fields: [alunoId], references: [matricula])
+}
+
+model ExercicioFicha {
+  idFicha Int 
+  ficha Ficha? @relation(fields: [idFicha], references: [id])
+  idExercicio Int
+  exercicio Exercicio? @relation(fields: [idExercicio], references: [id])
+  series Int
+  repeticoes Int
+  
+  @@id([idFicha, idExercicio])
+}

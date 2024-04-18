@@ -1,14 +1,18 @@
 "use client"
-import FuncionariosTable from "@/components/funcionarios/funcionarios-table";
+import { PersonalModal } from "@/app/funcionarios/(components)/personal-modal";
+import { PersonalTable } from "@/app/funcionarios/(components)/personal-table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem } from "@/components/ui/select";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Personal } from "@/models/personal.model";
+import { funcionarios } from "@/models/mockedData/data";
 import { Plus, ArrowDown, ArrowUp } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Funcionarios() {
+export default function Personais() {
   const [searchString, setSearchString] = useState<string>("");
+  const [selectedPersonal, setSelectedPersonal] = useState<Personal>();
   return (
     <div className="flex justify-center flex-col items-center">
       <h1 className="scroll-m-20 text-2xl font-semibold tracking-tight lg:text-2xl mb-4">Funcionários</h1>
@@ -28,7 +32,10 @@ export default function Funcionarios() {
           </Link>
         </div>
       </div>
-      <FuncionariosTable searchString={searchString} />
+      <ScrollArea className="h-[700px] w-full border rounded-lg">
+        <PersonalTable searchString={searchString} setSelectedFuncionario={setSelectedPersonal}/>
+      </ScrollArea>
+      { selectedPersonal && <PersonalModal closeAction={() => setSelectedPersonal(undefined)} personal={selectedPersonal}/>}
     </div>
   )
 }

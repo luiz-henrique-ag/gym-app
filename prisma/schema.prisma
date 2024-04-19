@@ -5,7 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 datasource db {
@@ -13,63 +15,120 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Aluno {
-  matricula Int @id @default(autoincrement())
-  nome String
-  cpf String @db.VarChar(14)
-  telefone String @db.VarChar(14)
-  email String
-  dataNascimento DateTime 
-  altura Int 
-  peso Float
-  objetivo String
-  plano Plano @relation(fields: [planoId], references: [id])
-  planoId Int @unique
-  vencimento String
-  ultimoPagamento String
-  observacoes String
-  fichas Ficha[]
+enum Objective {
+  HYPERTROPHY
+  STRENGTH
+  WEIGHTLOSS
+  HEALTH
 }
 
-model Plano {
+model Client {
+  subscription Int @id @default(autoincrement())
+
+  name      String
+  email     String
+  document  String    @db.VarChar(14)
+  cellphone String    @db.VarChar(14)
+  birthDate DateTime?
+
+  height    Int
+  weight    Float
+  objective Objective
+
+  payments Payment[]
+  dueDate  String
+
+  observacoes String
+  fichas      Workout[]
+
+  ClientPlanHistory ClientPlanHistory[]
+  ClientPlan        ClientPlan[]
+}
+
+model ClientPlanHistory {
+  plan  String
+  value Float
+
+  clientSubscription Int    @unique
+  client             Client @relation(fields: [clientSubscription], references: [subscription])
+}
+
+model ClientPlan {
+  planId Int  @unique
+  plan   Plan @relation(fields: [planId], references: [id])
+
+  clientSubscription Int    @unique
+  client             Client @relation(fields: [clientSubscription], references: [subscription])
+
+  @@id([planId, clientSubscription])
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  DUE
+}
+
+model Payment {
+  plan   String
+  value  Float
+  status PaymentStatus
+
+  dueDate     DateTime
+  paymentDate DateTime?
+
+  clientSubscription Int    @unique
+  Client             Client @relation(fields: [clientSubscription], references: [subscription])
+}
+
+model Plan {
   id Int @id @default(autoincrement())
-  nome String
-  descricao String
-  valor Float
-  aluno Aluno?
+
+  name        String
+  description String
+  value       Float
+
+  ClientPlan ClientPlan[]
 }
 
 model Personal {
   id Int @id @default(autoincrement())
-  nome String
-  cpf String @db.VarChar(14)
-  telefone String @db.VarChar(14)
-  dataNascimento DateTime
-  email String
+
+  name      String
+  email     String
+  document  String   @db.VarChar(14)
+  cellphone String   @db.VarChar(14)
+  birthDate DateTime
 }
 
-model Exercicio {
+model Exercise {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  WorkoutExercise WorkoutExercise[]
+}
+
+model Workout {
   id Int @id @default(autoincrement())
-  Nome String
-  fichas ExercicioFicha[]
+
+  name        String
+  description String
+
+  exercises WorkoutExercise[]
+
+  clientSubscription Int
+  client             Client @relation(fields: [clientSubscription], references: [subscription])
 }
 
-model Ficha {
-  id Int @id @default(autoincrement())
-  nome String
-  descricao String
-  exercicio ExercicioFicha[]
-  alunoId Int
-  aluno Aluno? @relation(fields: [alunoId], references: [matricula])
-}
+model WorkoutExercise {
+  workoutId Int     @unique
+  workout   Workout @relation(fields: [workoutId], references: [id])
 
-model ExercicioFicha {
-  idFicha Int 
-  ficha Ficha? @relation(fields: [idFicha], references: [id])
-  idExercicio Int
-  exercicio Exercicio? @relation(fields: [idExercicio], references: [id])
-  series Int
-  repeticoes Int
-  
-  @@id([idFicha, idExercicio])
+  exerciseId Int      @unique
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+
+  sets Int
+  reps Int
+
+  @@id([workoutId, exerciseId])
 }

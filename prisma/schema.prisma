@@ -36,8 +36,8 @@ model Client {
   payments Payment[]
   dueDate  String
 
-  observacoes String
-  fichas      Workout[]
+  obs String
+  workouts      Workout[]
 
   ClientPlanHistory ClientPlanHistory[]
   ClientPlan        ClientPlan?

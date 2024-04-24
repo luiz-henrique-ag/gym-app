@@ -13,29 +13,52 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Menu, Trash } from "lucide-react";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Download, Menu, Trash } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
+
+const ExercicioDesc = () => (
+  <div className="flex justify-between">
+    <p className="text-muted-foreground">4x Supino Reto</p>
+    <div className="flex justify-between gap-5">
+      <p className="text-muted-foreground">12 reps.</p>
+      <p className="text-muted-foreground">20 kg</p>
+    </div>
+  </div>
+);
+
+interface FichaProps{
+  ficha: Object
+}
 
 export const FichaCard = () => {
   return (
-    <Card className="w-[500px] mb-2">
+    <Card className="w-[700px] mb-2">
       <CardHeader>
         <div className="flex justify-between">
           <CardTitle>Peito e Costas</CardTitle>
-          <Popover>
-            <PopoverTrigger>
-              <Button variant="ghost" size="icon">
-                <Menu size="20"/>
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-32">
-              <Button variant='destructive' className="w-full">
-                <Trash size='18' className="mr-2"/>
-                Excluir
-              </Button>
-            </PopoverContent>
-          </Popover>
+          <div>
+            <Button variant="ghost" size="icon">
+              <Download size="18"/>
+            </Button>
+            <Popover>
+              <PopoverTrigger>
+                <Button variant="ghost" size="icon">
+                  <Menu size="20" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-32">
+                <Button variant="destructive" className="w-full">
+                  <Trash size="18" className="mr-2" />
+                  Excluir
+                </Button>
+              </PopoverContent>
+            </Popover>
+          </div>
         </div>
         <CardDescription>
           Treino focado em hipertrofia para costas e peito.
@@ -45,8 +68,11 @@ export const FichaCard = () => {
         <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
             <AccordionTrigger>Exercícios</AccordionTrigger>
-            <AccordionContent>
-              Yes. It adheres to the WAI-ARIA design pattern.
+            <AccordionContent className="space-y-1">
+              <ExercicioDesc />
+              <ExercicioDesc />
+              <ExercicioDesc />
+              <ExercicioDesc />
             </AccordionContent>
           </AccordionItem>
         </Accordion>

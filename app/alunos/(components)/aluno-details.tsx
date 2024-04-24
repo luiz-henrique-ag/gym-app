@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import ConfirmDialog from "@/components/ui/confirm-dialog";
-import { Aluno } from "@/models/aluno.model";
+import { Aluno } from "@/models/client.model";
 import { CircleUserRound, CreditCard, PenSquare, Trash2 } from "lucide-react";
 import Link from "next/link";
 import React from "react";

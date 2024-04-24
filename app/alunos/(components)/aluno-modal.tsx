@@ -1,6 +1,6 @@
 import { Button } from "../../../components/ui/button";
 import React, { useState } from "react";
-import { Aluno } from "@/models/aluno.model";
+import { Aluno } from "@/models/client.model";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { CircleUserRound, CreditCard, PenSquare, Trash2 } from "lucide-react";
 import Link from "next/link";
@@ -23,7 +23,7 @@ const AlunoModal = ({ aluno, closeAction }: IModalProps) => {
       <div
         className="flex flex-col
         fixed top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 bg-white
-        min-w-[500px] p-7 border min-h-[500px] max-h-[520px]
+        min-w-[500px] p-7 min-h-[500px] max-h-[550px]
         z-10 shadow-md
         rounded-md mx-auto"
       >
@@ -45,7 +45,7 @@ const AlunoModal = ({ aluno, closeAction }: IModalProps) => {
             <AlunoDetails aluno={aluno} />
           </TabsContent>
           <TabsContent value="treinos" className="grid place-content-center">
-            <ScrollArea className="h-3/5">
+            <ScrollArea className="border rounded-lg p-2 h-[350px]">
               <FichaCard />
               <FichaCard />
               <FichaCard />

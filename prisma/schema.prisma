@@ -5,9 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -42,7 +40,7 @@ model Client {
   fichas      Workout[]
 
   ClientPlanHistory ClientPlanHistory[]
-  ClientPlan        ClientPlan[]
+  ClientPlan        ClientPlan?
 }
 
 model ClientPlanHistory {
